@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<pre></pre>
+		<button>MAKE POST REQUEST TO SERVER</button>
+	</body>
+	<script>
+		const pre = document.querySelector("pre");
+		const button = document.querySelector("button");
+		fetch("http://localhost:5000/users.json", {
+			method: "GET",
+		})
+			.then((d) => {
+				d.json().then((data) => {
+					pre.textContent = JSON.stringify(data);
+				});
+			})
+			.catch((e) => {
+				pre.textContent = "AN ERROR OCCURED";
+			});
+
+		//handle post button click
+		button.onclick = () => {
+			fetch("http://localhost:5000/users.json", {
+				method: "POST",
+			})
+				.then((d) => {
+					d.json().then((data) => {
+						pre.textContent = JSON.stringify(data);
+					});
+				})
+				.catch((e) => {
+					pre.textContent = "AN ERROR OCCURED";
+				});
+		};
+	</script>
+</html>
